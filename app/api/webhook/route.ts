@@ -26,6 +26,11 @@ type DownloadLink = {
   url: string;
 };
 
+type InvoiceAssignment = {
+  invoice_number: string;
+  invoice_date: string;
+};
+
 export async function POST(
   request: Request
 ) {
@@ -236,6 +241,95 @@ export async function POST(
       console.log(
         "✅ Commande enregistrée :",
         session.id
+      );
+
+      /*
+       * ATTRIBUTION DU NUMÉRO DE FACTURE
+       *
+       * La fonction Supabase est idempotente :
+       * si cette commande possède déjà un numéro,
+       * elle renvoie le numéro existant.
+       */
+
+      const {
+        data: invoiceAssignmentData,
+        error: invoiceAssignmentError,
+      } = await supabaseAdmin.rpc(
+        "assign_invoice_to_order",
+        {
+          p_stripe_session_id:
+            session.id,
+        }
+      );
+
+      if (invoiceAssignmentError) {
+        console.error(
+          "Erreur attribution numéro de facture :",
+          JSON.stringify(
+            invoiceAssignmentError,
+            null,
+            2
+          )
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              "Erreur attribution numéro de facture.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      const invoiceAssignment =
+        Array.isArray(
+          invoiceAssignmentData
+        )
+          ? (
+              invoiceAssignmentData[0] as
+                | InvoiceAssignment
+                | undefined
+            )
+          : (
+              invoiceAssignmentData as
+                | InvoiceAssignment
+                | null
+            );
+
+      if (
+        !invoiceAssignment
+          ?.invoice_number ||
+        !invoiceAssignment
+          ?.invoice_date
+      ) {
+        console.error(
+          "Aucune information de facture retournée pour :",
+          session.id
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              "Informations de facture manquantes.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      const invoiceNumber =
+        invoiceAssignment.invoice_number;
+
+      const invoiceDate =
+        invoiceAssignment.invoice_date;
+
+      console.log(
+        "✅ Facture attribuée :",
+        invoiceNumber,
+        invoiceDate
       );
 
       /*
