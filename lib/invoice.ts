@@ -103,6 +103,7 @@ export async function generateInvoicePdf({
     options?: {
       size?: number;
       bold?: boolean;
+      color?: ReturnType<typeof rgb>;
     }
   ) => {
     page.drawText(text, {
@@ -112,7 +113,9 @@ export async function generateInvoicePdf({
       font: options?.bold
         ? boldFont
         : regularFont,
-      color: rgb(0.12, 0.12, 0.12),
+      color:
+        options?.color ??
+        rgb(0.12, 0.12, 0.12),
     });
   };
 
@@ -127,6 +130,7 @@ export async function generateInvoicePdf({
     {
       size: 22,
       bold: true,
+      color: rgb(0.55, 0.25, 0.95),
     }
   );
 
@@ -360,28 +364,37 @@ export async function generateInvoicePdf({
     y: tableTop - 24,
     width: width - margin * 2,
     height: 24,
-    color: rgb(0.94, 0.94, 0.94),
+    color: rgb(0.95, 0.92, 1),
   });
 
   drawText(
     "Beat",
     margin + 8,
     tableTop - 16,
-    { bold: true }
+    {
+      bold: true,
+      color: rgb(0.42, 0.16, 0.75),
+    }
   );
 
   drawText(
     "Licence",
     285,
     tableTop - 16,
-    { bold: true }
+    {
+      bold: true,
+      color: rgb(0.42, 0.16, 0.75),
+    }
   );
 
   drawText(
     "Prix",
     width - margin - 80,
     tableTop - 16,
-    { bold: true }
+    {
+      bold: true,
+      color: rgb(0.42, 0.16, 0.75),
+    }
   );
 
   y = tableTop - 45;
