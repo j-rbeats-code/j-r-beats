@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Download } from "lucide-react";
+import {
+  Download,
+  FileText,
+} from "lucide-react";
 
 import { supabase } from "../../lib/supabase";
 
@@ -133,6 +136,123 @@ export default function AccountDownloads({
     }
   }
 
+  async function handleInvoiceDownload(
+    orderId: number
+  ) {
+    setErrorMessage("");
+
+    const requestKey =
+      `invoice-${orderId}`;
+
+    setLoadingKey(requestKey);
+
+    try {
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (
+        sessionError ||
+        !session?.access_token
+      ) {
+        setErrorMessage(
+          "Ta session a expiré. Reconnecte-toi."
+        );
+
+        return;
+      }
+
+      const response = await fetch(
+        "/api/account/invoice",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            Authorization:
+              `Bearer ${session.access_token}`,
+          },
+
+          body: JSON.stringify({
+            orderId,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        let message =
+          "Impossible de générer la facture.";
+
+        try {
+          const data =
+            (await response.json()) as {
+              error?: string;
+            };
+
+          if (data.error) {
+            message = data.error;
+          }
+        } catch {
+          // La réponse n'était pas du JSON.
+        }
+
+        setErrorMessage(message);
+        return;
+      }
+
+      const blob =
+        await response.blob();
+
+      const disposition =
+        response.headers.get(
+          "Content-Disposition"
+        );
+
+      const filenameMatch =
+        disposition?.match(
+          /filename="([^"]+)"/
+        );
+
+      const filename =
+        filenameMatch?.[1] ??
+        `facture-${orderId}.pdf`;
+
+      const url =
+        window.URL.createObjectURL(
+          blob
+        );
+
+      const link =
+        document.createElement("a");
+
+      link.href = url;
+      link.download = filename;
+
+      document.body.appendChild(link);
+
+      link.click();
+      link.remove();
+
+      window.URL.revokeObjectURL(
+        url
+      );
+    } catch (error) {
+      console.error(
+        "Erreur téléchargement facture :",
+        error
+      );
+
+      setErrorMessage(
+        "Une erreur est survenue pendant le téléchargement de la facture."
+      );
+    } finally {
+      setLoadingKey(null);
+    }
+  }
+
   const purchasedItems =
     orders.flatMap((order) => {
       const items =
@@ -214,6 +334,9 @@ export default function AccountDownloads({
               const baseKey =
                 `${item.orderId}-${item.slug}-${index}`;
 
+              const invoiceLoadingKey =
+                `invoice-${item.orderId}`;
+
               return (
                 <div
                   key={baseKey}
@@ -234,6 +357,28 @@ export default function AccountDownloads({
                   </p>
 
                   <div className="mt-5 space-y-3">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleInvoiceDownload(
+                          item.orderId
+                        )
+                      }
+                      disabled={
+                        loadingKey ===
+                        invoiceLoadingKey
+                      }
+                      className="flex w-full items-center justify-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 font-bold text-emerald-300 transition hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      <FileText
+                        size={18}
+                      />
+
+                      {loadingKey ===
+                      invoiceLoadingKey
+                        ? "Préparation de la facture..."
+                        : "Télécharger la facture"}
+                    </button>
 
                     <button
                       type="button"
