@@ -228,6 +228,30 @@ export async function generateInvoicePdf({
   );
 
   // --------------------------------------------------
+  // STATUT PAYÉE
+  // --------------------------------------------------
+
+  invoiceInfoY -= 34;
+
+  page.drawRectangle({
+    x: invoiceInfoX,
+    y: invoiceInfoY - 7,
+    width: 72,
+    height: 24,
+    color: rgb(0.93, 0.98, 0.94),
+    borderColor: rgb(0.25, 0.65, 0.35),
+    borderWidth: 1,
+  });
+
+  page.drawText("PAYÉE", {
+    x: invoiceInfoX + 17,
+    y: invoiceInfoY,
+    size: 10,
+    font: boldFont,
+    color: rgb(0.15, 0.5, 0.25),
+  });
+
+  // --------------------------------------------------
   // CLIENT
   // --------------------------------------------------
 
