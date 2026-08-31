@@ -364,7 +364,7 @@ export async function generateInvoicePdf({
     y: tableTop - 24,
     width: width - margin * 2,
     height: 24,
-    color: rgb(0.95, 0.92, 1),
+    color: rgb(0.48, 0.18, 0.82),
   });
 
   drawText(
@@ -373,7 +373,7 @@ export async function generateInvoicePdf({
     tableTop - 16,
     {
       bold: true,
-      color: rgb(0.42, 0.16, 0.75),
+      color: rgb(1, 1, 1),
     }
   );
 
@@ -383,7 +383,7 @@ export async function generateInvoicePdf({
     tableTop - 16,
     {
       bold: true,
-      color: rgb(0.42, 0.16, 0.75),
+      color: rgb(1, 1, 1),
     }
   );
 
@@ -393,7 +393,7 @@ export async function generateInvoicePdf({
     tableTop - 16,
     {
       bold: true,
-      color: rgb(0.42, 0.16, 0.75),
+      color: rgb(1, 1, 1),
     }
   );
 
