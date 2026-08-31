@@ -240,13 +240,15 @@ export async function POST(
 
         payment_method_types: ["card"],
 
+        billing_address_collection: "required",
+
         line_items: lineItems,
 
         success_url:
-          "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+          "https://www.jr-beats.fr/success?session_id={CHECKOUT_SESSION_ID}",
 
         cancel_url:
-          "http://localhost:3000/",
+          "https://www.jr-beats.fr/",
 
         metadata: {
           items: JSON.stringify(

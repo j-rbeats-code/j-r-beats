@@ -121,6 +121,31 @@ export async function POST(
         session.customer_details?.email ??
         null;
 
+      const customerName =
+        session.customer_details?.name ??
+        null;
+
+      const billingAddress =
+        session.customer_details?.address;
+
+      const billingAddressLine1 =
+        billingAddress?.line1 ?? null;
+
+      const billingAddressLine2 =
+        billingAddress?.line2 ?? null;
+
+      const billingPostalCode =
+        billingAddress?.postal_code ?? null;
+
+      const billingCity =
+        billingAddress?.city ?? null;
+
+      const billingState =
+        billingAddress?.state ?? null;
+
+      const billingCountry =
+        billingAddress?.country ?? null;
+
       const amountTotal =
         (session.amount_total ?? 0) / 100;
 
@@ -138,6 +163,27 @@ export async function POST(
 
               customer_email:
                 customerEmail,
+
+              customer_name:
+                customerName,
+
+              billing_address_line1:
+                billingAddressLine1,
+
+              billing_address_line2:
+                billingAddressLine2,
+
+              billing_postal_code:
+                billingPostalCode,
+
+              billing_city:
+                billingCity,
+
+              billing_state:
+                billingState,
+
+              billing_country:
+                billingCountry,
 
               amount_total:
                 amountTotal,
