@@ -43,7 +43,7 @@ export default function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-contain object-[center_15%] scale-[1.10] translate-y-[35px] sm:translate-y-0 sm:object-cover sm:object-center sm:scale-100"
       />
 
       <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/45 to-black/10" />
@@ -52,15 +52,13 @@ export default function Hero() {
       <div className="absolute left-[-100px] top-1/3 h-96 w-96 rounded-full bg-purple-700/20 blur-[140px]" />
       <div className="absolute bottom-0 left-1/2 h-72 w-72 rounded-full bg-orange-500/10 blur-[140px]" />
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-112px)] max-w-7xl items-center px-6 pb-44 pt-12 md:px-10 lg:px-16">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-112px)] max-w-7xl items-center px-6 pb-8 pt-12 md:px-10 md:pb-44 lg:px-16">
         <div className="max-w-2xl">
-         
-
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="relative -ml-10 -mt-8 h-[360px] w-[460px] sm:h-[450px] sm:w-[570px] lg:h-[560px] lg:w-[700px]"
+            className="relative -ml-3 -mt-[45px] h-[220px] w-[285px] sm:-ml-10 sm:-mt-8 sm:h-[450px] sm:w-[570px] lg:h-[560px] lg:w-[700px]"
           >
             <Image
               src="/images/logo-jr-beats-transparent.png"
@@ -76,13 +74,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="-mt-10"
+            className="mt-[50px] sm:-mt-10"
           >
-            <h2 className="text-2xl font-black uppercase tracking-wide sm:text-3xl lg:text-4xl">
+            <h2 className="text-[14px] font-black uppercase tracking-wide sm:text-3xl lg:text-4xl">
               Dark melodic beats
             </h2>
 
-            <p className="mt-2 text-2xl font-black uppercase tracking-wide text-purple-400 sm:text-3xl lg:text-4xl">
+            <p className="mt-2 text-[14px] font-black uppercase tracking-wide text-purple-400 sm:text-3xl lg:text-4xl">
               Pour artistes sérieux
             </p>
           </motion.div>
@@ -91,7 +89,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-6 max-w-xl text-base leading-7 text-zinc-300 md:text-lg"
+            className="mt-6 max-w-xl text-[12px] leading-5 text-zinc-300 md:text-lg"
           >
             Des instrumentales sombres, mélodiques et puissantes pour donner
             une véritable identité à tes projets.
@@ -101,11 +99,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-9 flex flex-col gap-4 sm:flex-row"
+            className="mt-4 flex flex-col gap-2 sm:mt-9 sm:flex-row sm:gap-4"
           >
             <a
               href="#beats"
-              className="group flex items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-purple-700 to-purple-500 px-8 py-4 font-bold uppercase shadow-[0_0_35px_rgba(147,51,234,0.3)] transition hover:scale-[1.03] hover:shadow-[0_0_45px_rgba(147,51,234,0.55)]"
+              className="group flex items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-purple-700 to-purple-500 px-8 py-3 font-bold uppercase shadow-[0_0_35px_rgba(147,51,234,0.3)] transition hover:scale-[1.03] hover:shadow-[0_0_45px_rgba(147,51,234,0.55)] sm:py-4"
             >
               Écouter les beats
               <ArrowRight
@@ -116,7 +114,7 @@ export default function Hero() {
 
             <a
               href="#licenses"
-              className="flex items-center justify-center gap-3 rounded-lg border border-white/30 bg-black/30 px-8 py-4 font-bold uppercase backdrop-blur-md transition hover:border-purple-400 hover:bg-purple-600/20"
+              className="flex items-center justify-center gap-3 rounded-lg border border-white/30 bg-black/30 px-8 py-3 font-bold uppercase backdrop-blur-md transition hover:border-purple-400 hover:bg-purple-600/20 sm:py-4"
             >
               <FileText size={19} />
               Voir les licences
@@ -147,7 +145,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 z-20 w-full px-4 pb-5 md:px-8">
+      <div className="relative z-20 w-full px-4 pb-5 md:absolute md:bottom-0 md:left-0 md:px-8">
         <div className="mx-auto grid max-w-7xl grid-cols-2 overflow-hidden rounded-2xl border border-white/10 bg-black/75 backdrop-blur-xl md:grid-cols-4">
           {benefits.map((benefit) => {
             const Icon = benefit.icon;

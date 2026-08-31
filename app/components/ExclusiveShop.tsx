@@ -60,7 +60,7 @@ export default async function ExclusiveShop() {
       className="border-y border-white/10 bg-zinc-950/70 px-8 py-24"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-center text-sm font-bold uppercase tracking-[0.4em] text-purple-400">
+        <p className="text-center text-lg font-bold uppercase tracking-[0.4em] text-purple-400">
           Exclusif
         </p>
 

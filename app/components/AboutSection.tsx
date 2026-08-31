@@ -15,7 +15,7 @@ export default function AboutSection() {
         <div className="grid items-center gap-14 lg:grid-cols-2">
           {/* TEXTE */}
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.4em] text-purple-400">
+            <p className="text-lg font-bold uppercase tracking-[0.4em] text-purple-400">
               À propos
             </p>
 

@@ -3,7 +3,6 @@
 import {
   Check,
   FileText,
-  Heart,
   ShoppingCart,
   X,
 } from "lucide-react";
@@ -239,12 +238,12 @@ export default function LicenseSelector({
           )}
         </div>
 
-        <div className="flex gap-3">
+        <div>
           <button
             type="button"
             onClick={handleAddToCart}
             disabled={!licenseAccepted}
-            className={`flex flex-1 items-center justify-center gap-3 rounded-xl px-6 py-4 font-black uppercase text-white transition ${
+            className={`flex w-full items-center justify-center gap-3 rounded-xl px-6 py-4 font-black uppercase text-white transition ${
               licenseAccepted
                 ? "bg-gradient-to-r from-purple-600 to-fuchsia-500 shadow-[0_0_35px_rgba(168,85,247,0.3)] hover:scale-[1.02]"
                 : "cursor-not-allowed bg-zinc-800 text-zinc-500"
@@ -255,14 +254,6 @@ export default function LicenseSelector({
             {licenseAccepted
               ? "Ajouter au panier"
               : "Accepter la licence"}
-          </button>
-
-          <button
-            type="button"
-            aria-label="Ajouter aux favoris"
-            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-black/50 transition hover:border-purple-500 hover:text-purple-400"
-          >
-            <Heart size={21} />
           </button>
         </div>
       </div>

@@ -71,7 +71,7 @@ export default function LicenseShop() {
         className="px-8 py-24"
       >
         <div className="mx-auto max-w-6xl">
-          <p className="text-center text-sm uppercase tracking-[0.4em] text-purple-400">
+          <p className="text-center text-lg uppercase tracking-[0.4em] text-purple-400">
             Licences
           </p>
 
