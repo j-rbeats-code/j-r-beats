@@ -4,6 +4,7 @@ import { Resend } from "resend";
 
 import { supabaseAdmin } from "../../../lib/supabaseAdmin";
 import { createR2SignedUrl } from "../../../lib/r2";
+import { generateInvoicePdf } from "../../../lib/invoice";
 
 const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY!
@@ -545,6 +546,71 @@ export async function POST(
       }
 
       /*
+       * GÉNÉRATION DE LA FACTURE PDF
+       */
+
+      const invoicePdf =
+        await generateInvoicePdf({
+          invoiceNumber,
+
+          invoiceDate:
+            new Date(invoiceDate),
+
+          customer: {
+            name:
+              customerName,
+
+            email:
+              customerEmail,
+
+            addressLine1:
+              billingAddressLine1,
+
+            addressLine2:
+              billingAddressLine2,
+
+            postalCode:
+              billingPostalCode,
+
+            city:
+              billingCity,
+
+            state:
+              billingState,
+
+            country:
+              billingCountry === "FR"
+                ? "France"
+                : billingCountry,
+          },
+
+          items: items.map(
+            (item) => ({
+              beatTitle:
+                item.title,
+
+              license:
+                item.license,
+
+              price:
+                Number(item.price),
+            })
+          ),
+
+          total:
+            amountTotal,
+
+          currency:
+            session.currency ??
+            "eur",
+        });
+
+      console.log(
+        "✅ Facture PDF générée :",
+        invoiceNumber
+      );
+
+      /*
        * E-MAIL CLIENT
        */
 
@@ -682,6 +748,16 @@ export async function POST(
           subject:
             "Confirmation de ta commande J-R Beats 🎵",
 
+          attachments: [
+            {
+              filename:
+                `${invoiceNumber}.pdf`,
+
+              content:
+                Buffer.from(invoicePdf),
+            },
+          ],
+
           html: `
             <div
               style="
@@ -730,6 +806,25 @@ export async function POST(
                 >
                   Merci pour ta commande.
                   Ton paiement a bien été confirmé.
+                </p>
+
+                <p
+                  style="
+                    margin-top:16px;
+                    color:#a1a1aa;
+                    line-height:1.7;
+                    font-size:14px;
+                  "
+                >
+                  Ta facture
+                  <strong
+                    style="
+                      color:#ffffff;
+                    "
+                  >
+                    ${invoiceNumber}
+                  </strong>
+                  est jointe à cet e-mail au format PDF.
                 </p>
 
                 <div
@@ -813,7 +908,7 @@ export async function POST(
           );
         } else {
           console.log(
-            "✅ E-mail de confirmation envoyé :",
+            "✅ E-mail de confirmation envoyé avec facture :",
             emailData?.id
           );
         }
