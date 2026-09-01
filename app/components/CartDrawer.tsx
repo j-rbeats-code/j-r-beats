@@ -299,6 +299,23 @@ export default function CartDrawer() {
           </div>
         )}
 
+        {cart.length > 0 && (
+          <p className="mb-4 text-center text-xs leading-5 text-zinc-400">
+            En passant commande, je reconnais
+            avoir pris connaissance des{" "}
+            <a
+              href="/cgv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-purple-400 underline transition hover:text-purple-300"
+            >
+              Conditions Générales de Vente
+            </a>{" "}
+            et des conditions de la licence
+            sélectionnée.
+          </p>
+        )}
+
         <button
           type="button"
           onClick={handleCheckout}
@@ -307,7 +324,7 @@ export default function CartDrawer() {
             !digitalContentAccepted ||
             isCheckingOut
           }
-          className={`w-full rounded-xl py-4 font-black uppercase text-white transition ${
+          className={`w-full rounded-xl px-3 py-4 text-sm font-black uppercase text-white transition sm:text-base ${
             cart.length > 0 &&
             digitalContentAccepted &&
             !isCheckingOut
@@ -318,9 +335,9 @@ export default function CartDrawer() {
           {isCheckingOut
             ? "Vérification..."
             : cart.length === 0
-              ? "Commander"
+              ? "Commander avec obligation de paiement"
               : digitalContentAccepted
-                ? "Commander"
+                ? "Commander avec obligation de paiement"
                 : "Confirmer pour commander"}
         </button>
 

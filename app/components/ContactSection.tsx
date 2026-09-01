@@ -141,7 +141,34 @@ export default function ContactSection() {
         </div>
 
         <div className="mt-10 text-center text-sm text-zinc-500">
-          © 2026 J-R Beats — jr-beats.fr
+          <p>© 2026 J-R Beats — jr-beats.fr</p>
+
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="/mentions-legales"
+              className="transition hover:text-purple-400"
+            >
+              Mentions légales
+            </a>
+
+            <span>•</span>
+
+            <a
+              href="/cgv"
+              className="transition hover:text-purple-400"
+            >
+              CGV
+            </a>
+
+            <span>•</span>
+
+            <a
+              href="/politique-confidentialite"
+              className="transition hover:text-purple-400"
+            >
+              Confidentialité
+            </a>
+          </div>
         </div>
       </div>
     </section>

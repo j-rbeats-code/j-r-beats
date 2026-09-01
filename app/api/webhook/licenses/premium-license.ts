@@ -28,7 +28,7 @@ CONTRAT DE LICENCE PREMIUM / STEMS NON EXCLUSIVE — J-R BEATS
 Prix : 29,99 € TTC
 
 Le présent contrat définit les conditions dans lesquelles J-R Beats,
-exploité par [NOM LÉGAL DU VENDEUR À COMPLÉTER], ci-après dénommé
+exploité par Jérôme RANTIER, Entrepreneur individuel, ci-après dénommé
 « le Producteur », accorde à l’acheteur, ci-après dénommé
 « le Licencié », une licence d’utilisation portant sur l’instrumental
 identifié lors de la commande, ci-après dénommé « le Beat ».
@@ -339,23 +339,27 @@ sans préjudice des dispositions impératives qui pourraient
 Nom commercial :
 J-R Beats
 
-Nom légal / raison sociale :
-[À COMPLÉTER]
+Nom légal :
+Jérôme RANTIER
 
 Forme juridique :
-[À COMPLÉTER]
+Entrepreneur individuel
 
-SIREN / SIRET :
-[À COMPLÉTER]
+SIREN :
+108 822 958
+
+SIRET :
+108 822 958 00014
+
+Code APE :
+90.03B — Autre création artistique
 
 Adresse professionnelle :
-[À COMPLÉTER]
+9 Avenue Girardin
+95880 Enghien-les-Bains — France
 
 E-mail professionnel :
-[À COMPLÉTER]
-
-Ces informations devront être complétées avant
-l’ouverture commerciale définitive du site.
+j-rbeats@hotmail.com
 
 30. ACCEPTATION
 

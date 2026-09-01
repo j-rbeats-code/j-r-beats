@@ -741,7 +741,7 @@ export async function POST(
           error: emailError,
         } = await resend.emails.send({
           from:
-            "J-R Beats <onboarding@resend.dev>",
+            "J-R Beats <noreply@jr-beats.fr>",
 
           to: [customerEmail],
 
@@ -881,6 +881,53 @@ export async function POST(
                 </div>
 
                 ${downloadsHtml}
+
+                ${
+                  digitalContentAccepted
+                    ? `
+                      <div
+                        style="
+                          margin-top:28px;
+                          padding:16px;
+                          border-radius:12px;
+                          background:#09090b;
+                          border:1px solid #27272a;
+                        "
+                      >
+                        <div
+                          style="
+                            color:#d8b4fe;
+                            font-size:13px;
+                            font-weight:bold;
+                            text-transform:uppercase;
+                          "
+                        >
+                          Contenu numérique
+                        </div>
+
+                        <p
+                          style="
+                            margin-top:10px;
+                            margin-bottom:0;
+                            color:#a1a1aa;
+                            font-size:12px;
+                            line-height:1.7;
+                          "
+                        >
+                          Tu as expressément demandé
+                          la fourniture immédiate des
+                          fichiers numériques avant la
+                          fin du délai légal de
+                          rétractation et reconnu que
+                          cette exécution immédiate
+                          entraîne la perte de ton droit
+                          de rétractation dans les
+                          conditions prévues par la loi.
+                        </p>
+                      </div>
+                    `
+                    : ""
+                }
 
                 <p
                   style="
