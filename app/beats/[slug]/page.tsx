@@ -12,6 +12,9 @@ import {
 
 import AudioPlayer from "../../components/AudioPlayer";
 import LicenseSelector from "../../components/LicenseSelector";
+import CartDrawer from "../../components/CartDrawer";
+import CartOverlay from "../../components/CartOverlay";
+
 import { supabase } from "../../../lib/supabase";
 
 type BeatPageProps = {
@@ -66,7 +69,11 @@ export default async function BeatPage({
     .single();
 
   if (error || !data) {
-    console.error("Erreur Supabase :", error);
+    console.error(
+      "Erreur Supabase :",
+      error
+    );
+
     notFound();
   }
 
@@ -75,7 +82,9 @@ export default async function BeatPage({
   const licenses = [
     {
       name: "MP3" as const,
-      price: `${Number(beat.price_mp3)
+      price: `${Number(
+        beat.price_mp3
+      )
         .toFixed(2)
         .replace(".", ",")} €`,
       description: "Fichier MP3",
@@ -86,7 +95,9 @@ export default async function BeatPage({
     },
     {
       name: "WAV" as const,
-      price: `${Number(beat.price_wav)
+      price: `${Number(
+        beat.price_wav
+      )
         .toFixed(2)
         .replace(".", ",")} €`,
       description: "Fichier WAV",
@@ -97,7 +108,9 @@ export default async function BeatPage({
     },
     {
       name: "PREMIUM" as const,
-      price: `${Number(beat.price_premium)
+      price: `${Number(
+        beat.price_premium
+      )
         .toFixed(2)
         .replace(".", ",")} €`,
       description: "Pistes séparées",
@@ -108,10 +121,13 @@ export default async function BeatPage({
     },
     {
       name: "EXCLUSIVE" as const,
-      price: `${Number(beat.price_exclusive)
+      price: `${Number(
+        beat.price_exclusive
+      )
         .toFixed(2)
         .replace(".", ",")} €`,
-      description: "Exclusivité totale",
+      description:
+        "Exclusivité totale",
       features: [
         "Tous les fichiers",
         "Retrait de la boutique",
@@ -122,6 +138,7 @@ export default async function BeatPage({
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
       {/* FOND */}
+
       <div className="fixed inset-0 z-0">
         <Image
           src="/images/beat-page-bg.png"
@@ -142,6 +159,7 @@ export default async function BeatPage({
       <div className="pointer-events-none fixed bottom-[5%] right-[8%] z-20 h-[480px] w-[480px] rounded-full bg-fuchsia-600/10 blur-[160px]" />
 
       {/* CONTENU */}
+
       <div className="relative z-30 mx-auto max-w-7xl px-6 py-10 md:px-10 lg:px-16">
         <Link
           href="/#beats"
@@ -153,6 +171,7 @@ export default async function BeatPage({
 
         <section className="mt-10 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           {/* COLONNE GAUCHE */}
+
           <div>
             <div className="relative">
               <div className="absolute -inset-12 -z-10 h-[550px] w-[550px] rounded-full bg-purple-600/25 blur-[140px]" />
@@ -260,6 +279,7 @@ export default async function BeatPage({
           </div>
 
           {/* COLONNE DROITE */}
+
           <div
             className={`rounded-[32px] border p-7 shadow-[0_30px_100px_rgba(0,0,0,0.45)] backdrop-blur-[24px] md:p-10 ${
               beat.exclusive_sold
@@ -285,6 +305,7 @@ export default async function BeatPage({
             </p>
 
             {/* CARACTÉRISTIQUES */}
+
             <div className="mt-9">
               <p className="text-xs font-black uppercase tracking-[0.35em] text-purple-400">
                 Caractéristiques
@@ -312,6 +333,7 @@ export default async function BeatPage({
             </div>
 
             {/* ACHAT / VENDU */}
+
             {beat.exclusive_sold ? (
               <div className="mt-10 rounded-2xl border border-red-500/30 bg-red-950/30 p-6">
                 <p className="text-xs font-black uppercase tracking-[0.3em] text-red-300">
@@ -323,8 +345,10 @@ export default async function BeatPage({
                 </p>
 
                 <p className="mt-4 leading-7 text-zinc-300">
-                  Ce beat a déjà été vendu avec une licence EXCLUSIVE
-                  et n&apos;est plus disponible à l&apos;achat.
+                  Ce beat a déjà été vendu avec
+                  une licence EXCLUSIVE et
+                  n&apos;est plus disponible à
+                  l&apos;achat.
                 </p>
               </div>
             ) : (
@@ -337,6 +361,9 @@ export default async function BeatPage({
           </div>
         </section>
       </div>
+
+      <CartOverlay />
+      <CartDrawer />
     </main>
   );
 }

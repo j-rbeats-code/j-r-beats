@@ -6,12 +6,15 @@ import {
   ShoppingCart,
   X,
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 import {
   LicenseType,
   useCart,
 } from "../context/CartContext";
+
+import { useCartUI } from "../context/CartUIContext";
 
 import {
   mp3License,
@@ -39,6 +42,7 @@ export default function LicenseSelector({
   licenses,
 }: LicenseSelectorProps) {
   const { addToCart } = useCart();
+  const { openCart } = useCartUI();
 
   const [selectedIndex, setSelectedIndex] =
     useState(0);
@@ -47,6 +51,9 @@ export default function LicenseSelector({
     useState(false);
 
   const [licenseAccepted, setLicenseAccepted] =
+    useState(false);
+
+  const [addedToCart, setAddedToCart] =
     useState(false);
 
   const selectedLicense =
@@ -90,6 +97,7 @@ export default function LicenseSelector({
   ) {
     setSelectedIndex(index);
     setLicenseAccepted(false);
+    setAddedToCart(false);
   }
 
   function handleAddToCart() {
@@ -106,6 +114,8 @@ export default function LicenseSelector({
       ),
       licenseAccepted: true,
     });
+
+    setAddedToCart(true);
   }
 
   return (
@@ -211,11 +221,13 @@ export default function LicenseSelector({
             <input
               type="checkbox"
               checked={licenseAccepted}
-              onChange={(event) =>
+              onChange={(event) => {
                 setLicenseAccepted(
                   event.target.checked
-                )
-              }
+                );
+
+                setAddedToCart(false);
+              }}
               className="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-purple-600"
             />
 
@@ -238,24 +250,57 @@ export default function LicenseSelector({
           )}
         </div>
 
-        <div>
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            disabled={!licenseAccepted}
-            className={`flex w-full items-center justify-center gap-3 rounded-xl px-6 py-4 font-black uppercase text-white transition ${
-              licenseAccepted
-                ? "bg-gradient-to-r from-purple-600 to-fuchsia-500 shadow-[0_0_35px_rgba(168,85,247,0.3)] hover:scale-[1.02]"
-                : "cursor-not-allowed bg-zinc-800 text-zinc-500"
-            }`}
-          >
-            <ShoppingCart size={20} />
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          disabled={!licenseAccepted}
+          className={`flex w-full items-center justify-center gap-3 rounded-xl px-6 py-4 font-black uppercase text-white transition ${
+            licenseAccepted
+              ? "bg-gradient-to-r from-purple-600 to-fuchsia-500 shadow-[0_0_35px_rgba(168,85,247,0.3)] hover:scale-[1.02]"
+              : "cursor-not-allowed bg-zinc-800 text-zinc-500"
+          }`}
+        >
+          <ShoppingCart size={20} />
 
-            {licenseAccepted
-              ? "Ajouter au panier"
-              : "Accepter la licence"}
-          </button>
-        </div>
+          {licenseAccepted
+            ? "Ajouter au panier"
+            : "Accepter la licence"}
+        </button>
+
+        {addedToCart && (
+          <div className="mt-4 rounded-xl border border-purple-500/30 bg-purple-500/10 p-4">
+            <div className="flex items-center justify-center gap-2">
+              <Check
+                size={18}
+                className="text-green-400"
+              />
+
+              <p className="text-sm font-bold text-white">
+                Ajouté au panier
+              </p>
+            </div>
+
+            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => {
+                  setAddedToCart(false);
+                  openCart();
+                }}
+                className="flex-1 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 px-4 py-3 text-sm font-black uppercase text-white transition hover:scale-[1.02]"
+              >
+                Voir le panier
+              </button>
+
+              <Link
+                href="/#beats"
+                className="flex flex-1 items-center justify-center rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm font-bold text-zinc-300 transition hover:border-purple-400 hover:text-white"
+              >
+                Continuer mes achats
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
 
       {contractOpen && (
