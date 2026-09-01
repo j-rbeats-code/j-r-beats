@@ -8,6 +8,8 @@ import ContactSection from "./components/ContactSection";
 import CartOverlay from "./components/CartOverlay";
 import CartDrawer from "./components/CartDrawer";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
