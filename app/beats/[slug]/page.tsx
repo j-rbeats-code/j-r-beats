@@ -184,6 +184,78 @@ export default async function BeatPage({
     notFound();
   }
 
+  const canonicalUrl =
+    `${SITE_URL}/beats/${beat.slug}`;
+
+  const imageUrl =
+    getAbsoluteImageUrl(beat.image);
+
+  const seoDescription =
+    getSeoDescription(beat);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MusicComposition",
+    name: beat.title,
+    description: seoDescription,
+    url: canonicalUrl,
+    image: imageUrl,
+    genre: beat.style,
+    composer: {
+      "@type": "Person",
+      name: "J-R Beats",
+    },
+    creator: {
+      "@type": "Organization",
+      name: "J-R Beats",
+      url: SITE_URL,
+    },
+    offers: beat.exclusive_sold
+      ? undefined
+      : [
+          {
+            "@type": "Offer",
+            name: "Licence MP3",
+            price: Number(beat.price_mp3).toFixed(2),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            url: canonicalUrl,
+          },
+          {
+            "@type": "Offer",
+            name: "Licence WAV",
+            price: Number(beat.price_wav).toFixed(2),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            url: canonicalUrl,
+          },
+          {
+            "@type": "Offer",
+            name: "Licence PREMIUM",
+            price: Number(
+              beat.price_premium
+            ).toFixed(2),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            url: canonicalUrl,
+          },
+          {
+            "@type": "Offer",
+            name: "Licence EXCLUSIVE",
+            price: Number(
+              beat.price_exclusive
+            ).toFixed(2),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            url: canonicalUrl,
+          },
+        ],
+  };
+
   const licenses = [
     {
       name: "MP3" as const,
@@ -242,6 +314,15 @@ export default async function BeatPage({
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            structuredData
+          ),
+        }}
+      />
+
       {/* FOND */}
 
       <div className="fixed inset-0 z-0">
