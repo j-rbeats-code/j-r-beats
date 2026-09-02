@@ -1,7 +1,7 @@
 export const mp3License = {
   id: "MP3",
   name: "Licence MP3 non exclusive",
-  price: 9.99,
+  price: 4.99,
   currency: "EUR",
 
   shortDescription:
@@ -22,7 +22,7 @@ export const mp3License = {
   contract: `
 CONTRAT DE LICENCE MP3 NON EXCLUSIVE — J-R BEATS
 
-Prix : 9,99 € TTC
+Prix : 4,99 € TTC
 
 Le présent contrat définit les conditions dans lesquelles J-R Beats,
 exploité par Jérôme RANTIER, Entrepreneur individuel, ci-après dénommé
@@ -378,7 +378,7 @@ Licence :
 MP3 NON EXCLUSIVE
 
 Prix :
-9,99 € TTC
+4,99 € TTC
 
 Durée :
 À VIE

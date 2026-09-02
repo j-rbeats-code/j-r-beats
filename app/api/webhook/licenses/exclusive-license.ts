@@ -1,7 +1,7 @@
 export const exclusiveLicense = {
   id: "EXCLUSIVE",
   name: "Licence EXCLUSIVE",
-  price: 49.99,
+  price: 29.99,
   currency: "EUR",
 
   shortDescription:
@@ -27,7 +27,7 @@ export const exclusiveLicense = {
   contract: `
 CONTRAT DE LICENCE EXCLUSIVE — J-R BEATS
 
-Prix : 49,99 € TTC
+Prix : 29,99 € TTC
 
 Le présent contrat définit les conditions dans lesquelles J-R Beats,
 exploité par Jérôme RANTIER, Entrepreneur individuel, ci-après dénommé
@@ -452,7 +452,7 @@ Licence :
 EXCLUSIVE
 
 Prix :
-49,99 € TTC
+29,99 € TTC
 
 Durée :
 À VIE

@@ -1,7 +1,7 @@
 export const wavLicense = {
   id: "WAV",
   name: "Licence WAV non exclusive",
-  price: 19.99,
+  price: 9.99,
   currency: "EUR",
 
   shortDescription:
@@ -24,7 +24,7 @@ export const wavLicense = {
   contract: `
 CONTRAT DE LICENCE WAV NON EXCLUSIVE — J-R BEATS
 
-Prix : 19,99 € TTC
+Prix : 9,99 € TTC
 
 Le présent contrat définit les conditions dans lesquelles J-R Beats,
 exploité par Jérôme RANTIER, Entrepreneur individuel, ci-après dénommé
@@ -367,7 +367,7 @@ Licence :
 WAV NON EXCLUSIVE
 
 Prix :
-19,99 € TTC
+9,99 € TTC
 
 Durée :
 À VIE

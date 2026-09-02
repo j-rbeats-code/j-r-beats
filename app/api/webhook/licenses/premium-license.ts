@@ -1,7 +1,7 @@
 export const premiumLicense = {
   id: "PREMIUM",
   name: "Licence PREMIUM / STEMS non exclusive",
-  price: 29.99,
+  price: 19.99,
   currency: "EUR",
 
   shortDescription:
@@ -25,7 +25,7 @@ export const premiumLicense = {
   contract: `
 CONTRAT DE LICENCE PREMIUM / STEMS NON EXCLUSIVE — J-R BEATS
 
-Prix : 29,99 € TTC
+Prix : 19,99 € TTC
 
 Le présent contrat définit les conditions dans lesquelles J-R Beats,
 exploité par Jérôme RANTIER, Entrepreneur individuel, ci-après dénommé
@@ -375,7 +375,7 @@ Licence :
 PREMIUM / STEMS NON EXCLUSIVE
 
 Prix :
-29,99 € TTC
+19,99 € TTC
 
 Durée :
 À VIE

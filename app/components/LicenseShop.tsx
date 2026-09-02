@@ -35,26 +35,26 @@ export default function LicenseShop() {
   const licenses = [
     {
       name: "MP3" as const,
-      price: "9,99 €",
+      price: "4,99 €",
       description:
         "Fichier MP3 haute qualité avec licence standard.",
     },
     {
       name: "WAV" as const,
-      price: "19,99 €",
+      price: "9,99 €",
       description:
         "MP3 + WAV 24-bit haute qualité pour une utilisation commerciale.",
       popular: true,
     },
     {
       name: "PREMIUM" as const,
-      price: "29,99 €",
+      price: "19,99 €",
       description:
         "MP3 + WAV 24-bit + STEMS / pistes séparées.",
     },
     {
       name: "EXCLUSIVE" as const,
-      price: "49,99 €",
+      price: "29,99 €",
       description:
         "Tous les fichiers avec licence exclusive et retrait du beat de la vente.",
     },
