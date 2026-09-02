@@ -193,9 +193,74 @@ export default async function BeatPage({
   const seoDescription =
     getSeoDescription(beat);
 
-  const structuredData = {
+  const productStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${canonicalUrl}#product`,
+    name: `${beat.title} - Beat`,
+    description: seoDescription,
+    url: canonicalUrl,
+    image: [imageUrl],
+    sku: `beat-${beat.id}`,
+    category: `Beat / Instrumentale ${beat.style}`,
+    brand: {
+      "@type": "Brand",
+      name: "J-R Beats",
+    },
+    offers: beat.exclusive_sold
+      ? undefined
+      : [
+          {
+            "@type": "Offer",
+            name: "Licence MP3",
+            url: canonicalUrl,
+            price: Number(beat.price_mp3),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            itemCondition:
+              "https://schema.org/NewCondition",
+          },
+          {
+            "@type": "Offer",
+            name: "Licence WAV",
+            url: canonicalUrl,
+            price: Number(beat.price_wav),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            itemCondition:
+              "https://schema.org/NewCondition",
+          },
+          {
+            "@type": "Offer",
+            name: "Licence PREMIUM",
+            url: canonicalUrl,
+            price: Number(beat.price_premium),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            itemCondition:
+              "https://schema.org/NewCondition",
+          },
+          {
+            "@type": "Offer",
+            name: "Licence EXCLUSIVE",
+            url: canonicalUrl,
+            price: Number(beat.price_exclusive),
+            priceCurrency: "EUR",
+            availability:
+              "https://schema.org/InStock",
+            itemCondition:
+              "https://schema.org/NewCondition",
+          },
+        ],
+  };
+
+  const musicStructuredData = {
     "@context": "https://schema.org",
     "@type": "MusicComposition",
+    "@id": `${canonicalUrl}#music`,
     name: beat.title,
     description: seoDescription,
     url: canonicalUrl,
@@ -210,50 +275,6 @@ export default async function BeatPage({
       name: "J-R Beats",
       url: SITE_URL,
     },
-    offers: beat.exclusive_sold
-      ? undefined
-      : [
-          {
-            "@type": "Offer",
-            name: "Licence MP3",
-            price: Number(beat.price_mp3).toFixed(2),
-            priceCurrency: "EUR",
-            availability:
-              "https://schema.org/InStock",
-            url: canonicalUrl,
-          },
-          {
-            "@type": "Offer",
-            name: "Licence WAV",
-            price: Number(beat.price_wav).toFixed(2),
-            priceCurrency: "EUR",
-            availability:
-              "https://schema.org/InStock",
-            url: canonicalUrl,
-          },
-          {
-            "@type": "Offer",
-            name: "Licence PREMIUM",
-            price: Number(
-              beat.price_premium
-            ).toFixed(2),
-            priceCurrency: "EUR",
-            availability:
-              "https://schema.org/InStock",
-            url: canonicalUrl,
-          },
-          {
-            "@type": "Offer",
-            name: "Licence EXCLUSIVE",
-            price: Number(
-              beat.price_exclusive
-            ).toFixed(2),
-            priceCurrency: "EUR",
-            availability:
-              "https://schema.org/InStock",
-            url: canonicalUrl,
-          },
-        ],
   };
 
   const licenses = [
@@ -318,7 +339,16 @@ export default async function BeatPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
-            structuredData
+            productStructuredData
+          ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            musicStructuredData
           ),
         }}
       />
