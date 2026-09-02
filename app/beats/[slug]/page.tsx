@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 import {
   ArrowLeft,
@@ -41,43 +43,146 @@ type Beat = {
   exclusive_sold: boolean;
 };
 
+const SITE_URL = "https://www.jr-beats.fr";
+
+const getBeatBySlug = cache(
+  async (slug: string): Promise<Beat | null> => {
+    const { data, error } = await supabase
+      .from("beats")
+      .select(`
+        id,
+        slug,
+        title,
+        image,
+        audio,
+        bpm,
+        key_name,
+        duration,
+        style,
+        description,
+        price_mp3,
+        price_wav,
+        price_premium,
+        price_exclusive,
+        exclusive_sold
+      `)
+      .eq("slug", slug)
+      .single();
+
+    if (error || !data) {
+      return null;
+    }
+
+    return data as Beat;
+  }
+);
+
+function getSeoDescription(beat: Beat) {
+  const fallback =
+    `${beat.title}, une instrumentale ${beat.style} produite par J-R Beats. ` +
+    "Écoute le beat et choisis ta licence MP3, WAV, PREMIUM ou EXCLUSIVE.";
+
+  const description =
+    beat.description?.trim() || fallback;
+
+  if (description.length <= 160) {
+    return description;
+  }
+
+  return `${description.slice(0, 157).trim()}...`;
+}
+
+function getAbsoluteImageUrl(image: string) {
+  if (
+    image.startsWith("http://") ||
+    image.startsWith("https://")
+  ) {
+    return image;
+  }
+
+  const normalizedImage = image.startsWith("/")
+    ? image
+    : `/${image}`;
+
+  return `${SITE_URL}${normalizedImage}`;
+}
+
+export async function generateMetadata({
+  params,
+}: BeatPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const beat = await getBeatBySlug(slug);
+
+  if (!beat) {
+    return {
+      title: "Beat introuvable | J-R Beats",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const title =
+    `${beat.title} | Instrumentale ${beat.style} | J-R Beats`;
+
+  const description =
+    getSeoDescription(beat);
+
+  const canonicalUrl =
+    `${SITE_URL}/beats/${beat.slug}`;
+
+  const imageUrl =
+    getAbsoluteImageUrl(beat.image);
+
+  return {
+    title,
+    description,
+
+    alternates: {
+      canonical: canonicalUrl,
+    },
+
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "J-R Beats",
+      locale: "fr_FR",
+      type: "website",
+      images: [
+        {
+          url: imageUrl,
+          alt: `${beat.title} - J-R Beats`,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
+
 export default async function BeatPage({
   params,
 }: BeatPageProps) {
   const { slug } = await params;
 
-  const { data, error } = await supabase
-    .from("beats")
-    .select(`
-      id,
-      slug,
-      title,
-      image,
-      audio,
-      bpm,
-      key_name,
-      duration,
-      style,
-      description,
-      price_mp3,
-      price_wav,
-      price_premium,
-      price_exclusive,
-      exclusive_sold
-    `)
-    .eq("slug", slug)
-    .single();
+  const beat = await getBeatBySlug(slug);
 
-  if (error || !data) {
+  if (!beat) {
     console.error(
-      "Erreur Supabase :",
-      error
+      "Beat introuvable dans Supabase :",
+      slug
     );
 
     notFound();
   }
-
-  const beat = data as Beat;
 
   const licenses = [
     {
