@@ -102,6 +102,49 @@ export default function MentionsLegalesPage() {
               E-mail : j-rbeats@hotmail.com
             </p>
           </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-bold text-white">
+              6. Médiation de la consommation
+            </h2>
+
+            <p className="leading-7">
+              Conformément aux dispositions du Code de la consommation
+              concernant « le processus de médiation des litiges de la
+              consommation », après nous avoir sollicités et à défaut de
+              réponse vous satisfaisant, vous avez la possibilité de recourir
+              gratuitement à une procédure de médiation de la consommation
+              auprès de :
+            </p>
+
+            <div className="mt-5 rounded-xl border border-purple-500/30 bg-purple-500/5 p-5 leading-7">
+              <strong className="text-lg text-white">CM2C</strong>
+              <br />
+              49 rue de Ponthieu
+              <br />
+              75 008 PARIS
+              <br />
+              Tél : 01 89 47 00 14
+              <br />
+              Site internet :{" "}
+              <a
+                href="https://www.cm2c.net/declarer-un-litige.php"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-purple-400 underline transition hover:text-purple-300"
+              >
+                www.cm2c.net/declarer-un-litige.php
+              </a>
+              <br />
+              Mail :{" "}
+              <a
+                href="mailto:litiges@cm2c.net"
+                className="font-semibold text-purple-400 underline transition hover:text-purple-300"
+              >
+                litiges@cm2c.net
+              </a>
+            </div>
+          </section>
         </div>
       </div>
     </main>
