@@ -4,11 +4,11 @@ export default function CGVPage() {
       <div className="mx-auto max-w-4xl">
         <h1 className="mb-4 text-4xl font-black uppercase">
           Conditions Générales de{" "}
-          <span className="text-purple-500">Vente</span>
+          <span className="text-purple-400">Vente</span>
         </h1>
 
-        <p className="mb-12 text-sm text-zinc-500">
-          Conditions applicables aux achats effectués sur J-R Beats.
+        <p className="mb-12 text-zinc-400">
+          Dernière mise à jour : 12 septembre 2026
         </p>
 
         <div className="space-y-10 text-zinc-300">
@@ -110,15 +110,9 @@ export default function CGVPage() {
             </h2>
 
             <p className="leading-7">
-              Le client sélectionne le beat et la licence souhaités, puis
-              procède au paiement par l&apos;intermédiaire du système de
-              paiement proposé sur le site.
-            </p>
-
-            <p className="mt-4 leading-7">
-              Le client est responsable de l&apos;exactitude des informations
-              communiquées lors de sa commande, notamment son adresse e-mail et
-              ses informations de facturation.
+              Le client sélectionne l&apos;instrumentale et la licence de son
+              choix, puis procède à la validation de sa commande et au paiement
+              après avoir renseigné les informations nécessaires.
             </p>
 
             <p className="mt-4 leading-7">
@@ -210,18 +204,14 @@ export default function CGVPage() {
 
           <section>
             <h2 className="mb-3 text-xl font-bold text-white">
-              10. Licence EXCLUSIVE
+              10. Responsabilité
             </h2>
 
             <p className="leading-7">
-              Lorsqu&apos;une instrumentale est vendue sous licence EXCLUSIVE,
-              elle est retirée de la vente sur J-R Beats conformément aux
-              conditions prévues par le contrat de licence EXCLUSIVE.
-            </p>
-
-            <p className="mt-4 leading-7">
-              Les éventuelles licences accordées antérieurement à des tiers
-              restent régies par leurs contrats respectifs.
+              J-R Beats ne saurait être tenu responsable d&apos;une utilisation
+              des instrumentales contraire aux conditions de la licence
+              achetée, ni des conséquences résultant d&apos;une utilisation
+              non autorisée.
             </p>
           </section>
 
@@ -252,7 +242,9 @@ export default function CGVPage() {
               Pour toute question ou réclamation concernant une commande, le
               client peut contacter J-R Beats à l&apos;adresse :
               <br />
-              <strong className="text-white">j-rbeats@hotmail.com</strong>
+              <strong className="text-white">
+                j-rbeats@hotmail.com
+              </strong>
             </p>
           </section>
 
@@ -261,12 +253,41 @@ export default function CGVPage() {
               13. Médiation de la consommation
             </h2>
 
-            <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/5 p-5">
-              <p className="leading-7 text-yellow-200">
-                Cette section sera complétée avec le nom, les coordonnées et
-                les modalités de saisine du médiateur de la consommation
-                compétent après finalisation de l&apos;adhésion de J-R Beats.
-              </p>
+            <p className="leading-7">
+              Conformément aux dispositions du Code de la consommation
+              concernant « le processus de médiation des litiges de la
+              consommation », après nous avoir sollicités et à défaut de
+              réponse vous satisfaisant, vous avez la possibilité de recourir
+              gratuitement à une procédure de médiation de la consommation
+              auprès de :
+            </p>
+
+            <div className="mt-5 rounded-xl border border-purple-500/30 bg-purple-500/5 p-5 leading-7">
+              <strong className="text-lg text-white">CM2C</strong>
+              <br />
+              49 rue de Ponthieu
+              <br />
+              75 008 PARIS
+              <br />
+              Tél : 01 89 47 00 14
+              <br />
+              Site internet :{" "}
+              <a
+                href="https://www.cm2c.net/declarer-un-litige.php"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-purple-400 underline transition hover:text-purple-300"
+              >
+                www.cm2c.net/declarer-un-litige.php
+              </a>
+              <br />
+              Mail :{" "}
+              <a
+                href="mailto:litiges@cm2c.net"
+                className="font-semibold text-purple-400 underline transition hover:text-purple-300"
+              >
+                litiges@cm2c.net
+              </a>
             </div>
           </section>
 
@@ -282,7 +303,7 @@ export default function CGVPage() {
             </p>
 
             <p className="mt-4 leading-7">
-              Des informations complémentaires seront disponibles dans la
+              Des informations complémentaires sont disponibles dans la
               politique de confidentialité du site.
             </p>
           </section>
@@ -308,7 +329,9 @@ export default function CGVPage() {
               Pour toute question relative aux présentes Conditions Générales
               de Vente :
               <br />
-              <strong className="text-white">j-rbeats@hotmail.com</strong>
+              <strong className="text-white">
+                j-rbeats@hotmail.com
+              </strong>
             </p>
           </section>
         </div>
