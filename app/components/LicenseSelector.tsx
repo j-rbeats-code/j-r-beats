@@ -153,7 +153,7 @@ export default function LicenseSelector({
                   {license.name}
                 </p>
 
-                <p className="mt-3 text-2xl font-black text-purple-400">
+                <p className="mt-3 whitespace-nowrap text-2xl font-black text-purple-400">
                   {license.price}
                 </p>
 
@@ -199,7 +199,7 @@ export default function LicenseSelector({
               </p>
             </div>
 
-            <p className="text-2xl font-black text-purple-400">
+            <p className="whitespace-nowrap text-2xl font-black text-purple-400">
               {selectedLicense.price}
             </p>
           </div>
