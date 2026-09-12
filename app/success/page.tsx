@@ -2,6 +2,7 @@ import Link from "next/link";
 import Stripe from "stripe";
 
 import { supabaseAdmin } from "../../lib/supabaseAdmin";
+import ClearCartOnSuccess from "./ClearCartOnSuccess";
 
 type SuccessPageProps = {
   searchParams: Promise<{
@@ -121,6 +122,8 @@ export default async function SuccessPage({
 
     return (
       <main className="flex min-h-screen items-center justify-center bg-black px-6 py-12 text-white">
+        {paid && <ClearCartOnSuccess />}
+
         <div className="w-full max-w-xl rounded-3xl border border-white/10 bg-zinc-950 p-10 text-center">
           {paid ? (
             <>
