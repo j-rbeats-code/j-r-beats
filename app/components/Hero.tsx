@@ -42,6 +42,7 @@ export default function Hero() {
         alt="Univers visuel J-R Beats"
         fill
         priority
+        fetchPriority="high"
         sizes="100vw"
         className="object-contain object-[center_15%] scale-[1.10] translate-y-[35px] sm:translate-y-0 sm:object-cover sm:object-center sm:scale-100"
       />
