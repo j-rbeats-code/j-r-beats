@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   Heart,
@@ -81,15 +82,19 @@ export default function BeatCard({
           aria-label={`Voir la page de ${title}`}
           className="block"
         >
-          <img
-            src={image}
-            alt={title}
-            className={`h-64 w-full object-cover transition duration-700 ${
-              exclusiveSold
-                ? "grayscale"
-                : "group-hover:scale-110"
-            }`}
-          />
+          <div className="relative h-64 w-full">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, 306px"
+              className={`object-cover transition duration-700 ${
+                exclusiveSold
+                  ? "grayscale"
+                  : "group-hover:scale-110"
+              }`}
+            />
+          </div>
         </Link>
 
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-80" />
