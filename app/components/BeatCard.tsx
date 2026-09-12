@@ -87,7 +87,7 @@ export default function BeatCard({
               src={image}
               alt={title}
               fill
-              sizes="(max-width: 768px) 100vw, 306px"
+              sizes="(max-width: 768px) calc(100vw - 54px), 306px"
               className={`object-cover transition duration-700 ${
                 exclusiveSold
                   ? "grayscale"
