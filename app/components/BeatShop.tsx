@@ -33,7 +33,7 @@ export default async function BeatShop() {
       exclusive_sold
       `
     )
-    .order("id", { ascending: true });
+    .order("id", { ascending: false });
 
   if (error) {
     console.error("Erreur Supabase :", error);
