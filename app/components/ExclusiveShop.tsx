@@ -32,7 +32,7 @@ export default async function ExclusiveShop() {
       exclusive_sold
     `)
     .eq("exclusive_sold", false)
-    .order("id", { ascending: true });
+    .order("id", { ascending: false });
 
   if (error) {
     console.error(
