@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 
 import AudioPlayer from "./AudioPlayer";
-import { useCart } from "../context/CartContext";
 import { useFavorites } from "../context/FavoritesContext";
 
 type BeatCardProps = {
@@ -34,32 +33,12 @@ export default function BeatCard({
   duration,
   exclusiveSold,
 }: BeatCardProps) {
-  const { addToCart } = useCart();
-
   const {
     toggleFavorite,
     isFavorite,
   } = useFavorites();
 
   const favorite = isFavorite(slug);
-
-  function handleAddToCart() {
-    if (exclusiveSold) {
-      return;
-    }
-
-    addToCart({
-      slug,
-      title,
-      license: "MP3",
-      price: Number(
-        price
-          .replace(",", ".")
-          .replace(" €", "")
-      ),
-      licenseAccepted: true,
-    });
-  }
 
   function handleFavorite() {
     toggleFavorite({
@@ -200,22 +179,24 @@ export default function BeatCard({
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          disabled={exclusiveSold}
-          className={`flex items-center gap-2 rounded-full px-5 py-3 font-bold transition duration-300 ${
-            exclusiveSold
-              ? "cursor-not-allowed bg-zinc-800 text-zinc-500"
-              : "bg-white text-black hover:scale-105 hover:bg-purple-500 hover:text-white hover:shadow-[0_0_28px_rgba(168,85,247,0.45)]"
-          }`}
-        >
-          <ShoppingCart size={18} />
-
-          {exclusiveSold
-            ? "Vendu"
-            : "Acheter"}
-        </button>
+        {exclusiveSold ? (
+          <button
+            type="button"
+            disabled
+            className="flex cursor-not-allowed items-center gap-2 rounded-full bg-zinc-800 px-5 py-3 font-bold text-zinc-500"
+          >
+            <ShoppingCart size={18} />
+            Vendu
+          </button>
+        ) : (
+          <Link
+            href={`/beats/${slug}`}
+            className="flex items-center gap-2 rounded-full bg-white px-5 py-3 font-bold text-black transition duration-300 hover:scale-105 hover:bg-purple-500 hover:text-white hover:shadow-[0_0_28px_rgba(168,85,247,0.45)]"
+          >
+            <ShoppingCart size={18} />
+            Acheter
+          </Link>
+        )}
       </div>
     </article>
   );
